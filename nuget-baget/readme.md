@@ -1,6 +1,6 @@
-# BaGet (NuGet server)
+# NuGet Server using BaGet
 
-A lightweight NuGet and symbol server.
+BaGet is a lightweight NuGet and symbol server.
 
 ## Containers
 
