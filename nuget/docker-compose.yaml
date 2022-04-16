@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+
+  baget:
+    image: loicsharma/baget:latest
+    restart: always
+    environment:
+      # - ASPNETCORE_ENVIRONMENT=Production
+      # - ASPNETCORE_URLS=http://+:80
+      - Storage__Type=FileSystem
+      - Storage__Path=/var/baget/packages
+      - Database__Type=Sqlite
+      - Database__ConnectionString=Data Source=/var/baget/baget.db
+      - Search__Type=Database
+      - ApiKey=E2045F9611A34A58A99D96D6C5E4A679
+      - AllowPackageOverwrites=true
+      - PackageDeletionBehavior=HardDelete
+      - Mirror__Enabled=true
+    ports:
+      - "7080:80"
+    volumes:
+      - ./docker/baget:/var/baget
