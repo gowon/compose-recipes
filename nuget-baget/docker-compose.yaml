@@ -20,4 +20,4 @@ services:
     ports:
       - "7080:80"
     volumes:
-      - ./docker/baget:/var/baget
+      - ./.docker/baget:/var/baget

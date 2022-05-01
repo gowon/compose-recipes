@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+
+  vault:
+    image: vault:latest
+    container_name: vault
+    ports:
+      - "8200:8200"
+    restart: always
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=fab5978b6ed44026a76bd0616fc2223e
+    volumes:
+      - ./.docker/vault/logs:/vault/logs
+      - ./.docker/vault/file:/vault/file
+      # - ./config:/vault/config
+    cap_add:
+      - IPC_LOCK
+    # entrypoint: vault server -config=/vault/config/vault.json
