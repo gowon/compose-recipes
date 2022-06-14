@@ -1,0 +1,15 @@
+services:
+
+  keycloak:
+    image: keycloak/keycloak:latest
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KEYCLOAK_LOGLEVEL=INFO
+      - ROOT_LOGLEVEL=INFO
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./.docker/keycloak/data/:/opt/keycloak/data/
+    command:
+      - start-dev
