@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
 
 sqlserver:
@@ -10,4 +8,7 @@ sqlserver:
     ports:
       - "1433:1433"
     volumes:
-     - ./.docker/baget:/var/opt/mssql/data
+     - sqlserver_data:/var/opt/mssql/data
+
+volumes:
+  sqlserver_data:

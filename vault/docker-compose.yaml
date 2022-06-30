@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
 
   vault:
@@ -11,9 +9,13 @@ services:
     environment:
       - VAULT_DEV_ROOT_TOKEN_ID=fab5978b6ed44026a76bd0616fc2223e
     volumes:
-      - ./.docker/vault/logs:/vault/logs
-      - ./.docker/vault/file:/vault/file
+      - vault_data_logs:/vault/logs
+      - vault_data_file:/vault/file
       # - ./config:/vault/config
     cap_add:
       - IPC_LOCK
     # entrypoint: vault server -config=/vault/config/vault.json
+
+volumes:
+  vault_data_logs:
+  vault_data_file:

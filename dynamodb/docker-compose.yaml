@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
 
   dynamodb-local:
@@ -8,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./.docker/dynamodb:/home/dynamodblocal/data
+      - dynamodb_data:/home/dynamodblocal/data
     working_dir: /home/dynamodblocal
     command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
 
@@ -23,3 +21,6 @@ services:
       AWS_SECRET_ACCESS_KEY: local
     depends_on:
       - dynamodb-local
+
+volumes:
+  dynamodb_data:

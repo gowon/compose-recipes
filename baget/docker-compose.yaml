@@ -1,13 +1,9 @@
-version: "3.8"
-
 services:
 
   baget:
     image: loicsharma/baget:latest
     restart: always
     environment:
-      # - ASPNETCORE_ENVIRONMENT=Production
-      # - ASPNETCORE_URLS=http://+:80
       - Storage__Type=FileSystem
       - Storage__Path=/var/baget/packages
       - Database__Type=Sqlite
@@ -20,4 +16,7 @@ services:
     ports:
       - "7080:80"
     volumes:
-      - ./.docker/baget:/var/baget
+      - baget_data:/var/baget
+
+volumes:
+  baget_data:
