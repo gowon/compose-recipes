@@ -7,7 +7,7 @@ Redis is an open source key-value store that functions as a data structure serve
 |Container|Purpose|Image|Path|
 |-|-|-|-|
 |Redis|KV Storage|[`redis:7-alpine`](https://hub.docker.com/_/redis)|<http://localhost:6379/>|
-|Redis Commander|Redis Admin UI|[`rediscommander/redis-commander:latest`](https://hub.docker.com/r/rediscommander/redis-commander)|<http://localhost:8881/>|
+|Redis Commander|Redis Admin UI|[`rediscommander/redis-commander:latest`](https://hub.docker.com/r/rediscommander/redis-commander)|<http://localhost:8081/>|
 
 ## Usage
 
