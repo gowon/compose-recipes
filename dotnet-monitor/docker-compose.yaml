@@ -1,0 +1,108 @@
+services:
+  aspnetapp:
+    image: mcr.microsoft.com/dotnet/samples:aspnetapp
+    environment:
+      # - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_URLS=http://+:80
+      - DOTNET_EnableDiagnostics=1
+      - DOTNET_DiagnosticPorts=/diag/dotnet-monitor.sock
+      - DOTNET_gcServer=1
+    hostname: aspnetapp
+    profiles:
+      - dotnetsample
+    volumes:
+      - diagnostics_data:/diag
+    ports:
+      - "80"
+
+  aspnetapp6:
+    image: ${DOCKER_REGISTRY-}aspnetapp6
+    build:
+      context: .
+      dockerfile: aspnetapp6/Dockerfile
+    hostname: aspnetapp
+    profiles:
+      - net60
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - DOTNET_EnableDiagnostics=1
+      - DOTNET_DiagnosticPorts=/diag/dotnet-monitor.sock
+      - DOTNET_gcServer=1
+    volumes:
+      - diagnostics_data:/diag
+    ports:
+      - "80"
+
+  aspnetapp7:
+    image: ${DOCKER_REGISTRY-}aspnetapp7
+    build:
+      context: .
+      dockerfile: aspnetapp7/Dockerfile
+    hostname: aspnetapp
+    profiles:
+      - net70
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - DOTNET_EnableDiagnostics=1
+      - DOTNET_DiagnosticPorts=/diag/dotnet-monitor.sock
+      - DOTNET_gcServer=1
+    volumes:
+      - diagnostics_data:/diag
+    ports:
+      - "80"
+
+  monitor6:
+    image: mcr.microsoft.com/dotnet/monitor:6
+    environment: 
+      - DOTNETMONITOR_DiagnosticPort__ConnectionMode=Listen
+      - DOTNETMONITOR_DiagnosticPort__EndpointName=/diag/dotnet-monitor.sock
+      - DOTNETMONITOR_Logging__Console__FormatterName=simple
+      - DOTNETMONITOR_Storage__DefaultSharedPath=/diag
+      - DOTNETMONITOR_Storage__DumpTempFolder=/diag/dumps/
+      - DOTNETMONITOR_Urls=http://+:52323
+      - DOTNETMONITOR_Metrics__Endpoints=http://+:52325
+      - DOTNETMONITOR_Metrics__IncludeDefaultProviders=True
+      - DOTNETMONITOR_Metrics__Providers__0__ProviderName=Microsoft-AspNetCore-Server-Kestrel
+      - CorsConfiguration__AllowedOrigins=https://dotnet-monitor-ui.dev
+    hostname: monitor
+    profiles:
+      - net60
+    entrypoint: dotnet-monitor
+    command: ["collect", "--no-auth"]
+    ports:
+      - "52323:52323"
+      - "52325:52325"
+    volumes:
+      - diagnostics_data:/diag
+
+  monitor7:
+    image: mcr.microsoft.com/dotnet/monitor:7
+    environment: 
+      - DOTNETMONITOR_DiagnosticPort__ConnectionMode=Listen
+      - DOTNETMONITOR_Logging__Console__FormatterName=simple
+      - DOTNETMONITOR_Storage__DefaultSharedPath=/diag
+      - DOTNETMONITOR_Storage__DumpTempFolder=/diag/dumps/
+      - DOTNETMONITOR_Urls=http://+:52323
+      - DOTNETMONITOR_Metrics__Endpoints=http://+:52325
+      - DOTNETMONITOR_Metrics__IncludeDefaultProviders=True
+      - DOTNETMONITOR_Metrics__Providers__0__ProviderName=Microsoft-AspNetCore-Server-Kestrel
+      - CorsConfiguration__AllowedOrigins=https://dotnet-monitor-ui.dev
+    hostname: monitor
+    profiles:
+      - net70
+      - dotnetsample
+    entrypoint: dotnet-monitor
+    command: ["collect", "--no-auth"]
+    ports:
+      - "52323:52323"
+      - "52325:52325"
+    volumes:
+      - diagnostics_data:/diag
+
+volumes:
+  diagnostics_data:
+
+networks:
+  default:
+    name: monitor-shared
+    external: true

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetapp6", "aspnetapp6\aspnetapp6.csproj", "{24FB8D97-349F-41DF-9E03-AC7F05034018}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetapp7", "aspnetapp7\aspnetapp7.csproj", "{726E66DE-2760-4060-A109-7D0575FD0090}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24FB8D97-349F-41DF-9E03-AC7F05034018}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24FB8D97-349F-41DF-9E03-AC7F05034018}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24FB8D97-349F-41DF-9E03-AC7F05034018}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24FB8D97-349F-41DF-9E03-AC7F05034018}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726E66DE-2760-4060-A109-7D0575FD0090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726E66DE-2760-4060-A109-7D0575FD0090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726E66DE-2760-4060-A109-7D0575FD0090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726E66DE-2760-4060-A109-7D0575FD0090}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {017C13D3-2A94-4DF7-867A-99D40DC45571}
+	EndGlobalSection
+EndGlobal
