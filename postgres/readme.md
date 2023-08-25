@@ -6,7 +6,7 @@ Postgres, is a free and open-source relational database management system (RDBMS
 
 |Container|Purpose|Image|Path|
 |-|-|-|-|
-|PostgreSQL|Relational Database|[`postgres:14-alpine`](https://hub.docker.com/_/postgres)|<http://localhost:5432>|
+|PostgreSQL|Relational Database|[`postgres:15-alpine`](https://hub.docker.com/_/postgres)|<http://localhost:5433>|
 
 ## Usage
 

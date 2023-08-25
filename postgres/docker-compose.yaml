@@ -1,15 +1,14 @@
 services:
 
-  postgres:
-    image: postgres:14-alpine
-    restart: always
+  postgres-ef:
+    image: postgres:15-alpine
     ports:
-      - "5555:5432"
+      - "5433:5432"
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=master
-      - POSTGRES_ADDITIONAL_DATABASES=db2
+      - POSTGRES_ADDITIONAL_DATABASES=SampleDb
     healthcheck:
       test: pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"
       interval: 10s
