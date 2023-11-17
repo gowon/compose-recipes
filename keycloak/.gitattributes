@@ -1,0 +1,3 @@
+# Don't diff or textually merge source maps
+*.jar binary
+*.jar linguist-vendored
