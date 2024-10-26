@@ -5,39 +5,39 @@ services:
   
   sqlserver:
     build:
-      dockerfile: sqlserver-fulltext.Dockerfile
+      dockerfile: mssql-server2022-fts.Dockerfile
       tags:
-        - sqlserver-fulltext:latest
+        - mssql-server2022:fts
     ports:
-      - "11433:1433"
+      - "1433:1433"
     environment:
       <<: *common
       ACCEPT_EULA: Y
       MSSQL_AGENT_ENABLED: true
       MSSQL_PID: Developer
-    healthcheck:
-      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "$${MSSQL_SA_PASSWORD}" -Q "SELECT 1" -b -o /dev/null
-      interval: 10s
-      timeout: 3s
-      retries: 10
-      start_period: 5s
+      # USE_OTELCOL: true
     volumes:
-     - ./backups:/var/backups
-     - sqlserver_data:/var/opt/mssql
+      - ./backups:/var/backups
+      - ./mssql-server.otelcol-config.yaml:/etc/otelcol-contrib/config.yaml:ro
+      - sqlserver_data:/var/opt/mssql
 
-  sqlcmd:
-    image: mcr.microsoft.com/mssql-tools:latest
+  mssql-tools18:
+    build:
+      dockerfile: mssql-tools18-alpine.Dockerfile
+      tags:
+        - mssql-tools18:alpine-3.20
     profiles:
       - init
     depends_on:
-      sqlserver:
-        condition: service_healthy
+      - sqlserver
     environment:
       <<: *common
       MSSQL_HOST: sqlserver
+      # MSSQL_HOST_CONNECTION_MAX_RETRIES: 5
+      # MSSQL_HOST_CONNECTION_RETRY_WAIT_SECONDS: 3
     volumes:
-      - ./init:/init:ro
-    command: /init/run-scripts.sh
+      - ./scripts:/var/scripts:ro
+    command: /var/scripts/run-scripts.sh
 
 volumes:
   sqlserver_data:

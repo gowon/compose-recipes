@@ -1,0 +1,28 @@
+receivers:
+  sqlserver:                  # ref: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/sqlserverreceiver
+    collection_interval: 10s
+    username: sa
+    password: P@ssw0rd
+    server: localhost
+    port: 1433
+
+processors:
+  resource:                   # ref: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourceprocessor
+    attributes:
+      - key: service.name
+        action: upsert
+        value: mssqlserver2022
+  batch:
+
+exporters:
+  otlp/aspire:
+    endpoint: aspire:18889
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    metrics:
+      receivers: [sqlserver]
+      processors: [resource,batch]
+      exporters: [otlp/aspire]
