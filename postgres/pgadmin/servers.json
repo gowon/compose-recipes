@@ -1,0 +1,15 @@
+{
+    "Servers": {
+      "1": {
+        "Name": "Local Dev Instance",
+        "Group": "Servers",
+        "Host": "postgres",
+        "Port": 5432,
+        "MaintenanceDB": "postgres",
+        "Username": "root",
+        "PassFile": "/pgpass",
+        "SSLMode": "prefer",
+        "Comment": "This server was configured using JSON. See <https://www.pgadmin.org/docs/pgadmin4/latest/import_export_servers.html#json-format>"
+      }
+    }
+  }
