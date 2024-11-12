@@ -39,5 +39,24 @@ services:
       - ./scripts:/var/scripts:ro
     command: /var/scripts/run-scripts.sh
 
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:24
+    depends_on:
+      - sqlserver
+    ports:
+      - "8978"
+    environment:
+      - CLOUDBEAVER_APP_GRANT_CONNECTIONS_ACCESS_TO_ANONYMOUS_TEAM=true
+      - CB_SERVER_NAME=Test Server
+      - CB_ADMIN_NAME=administrator
+      - CB_ADMIN_PASSWORD=P@ssw0rd
+    volumes:
+      - ./cloudbeaver/data-sources.json:/opt/cloudbeaver/workspace/GlobalConfiguration/.dbeaver/data-sources.json
+      - ./cloudbeaver/product.conf:/opt/cloudbeaver/workspace/.data/.product.runtime.conf
+      - cloudbeaver_logs:/opt/cloudbeaver/logs
+      - cloudbeaver_data:/opt/cloudbeaver/workspace
+
 volumes:
   sqlserver_data:
+  cloudbeaver_logs:
+  cloudbeaver_data:

@@ -11,6 +11,7 @@ Microsoft SQL Server is a relational database management system (RDBMS). Applica
 |SQL Server 2022 on Linux|Relational Database|Dockerfile based on [`mcr.microsoft.com/mssql/server:2022-CU15-GDR1-ubuntu-22.04`](https://mcr.microsoft.com/en-us/artifact/mar/mssql/server/about)|`1433`|
 |SQL tools (`bcp` and `sqlcmd`)|SQL tools|Dockerfile based on [`alpine:3.20`](https://hub.docker.com/_/alpine)||
 |SQL tools (`bcp` and `sqlcmd`) w/ Locale support|SQL tools|Dockerfile based on [`ubuntu:24.04`](https://hub.docker.com/_/ubuntu/)||
+|CloudBeaver Community Edition|Admin GUI|[`dbeaver/cloudbeaver:24`](https://hub.docker.com/r/dbeaver/cloudbeaver)|`8978`|
 
 You can build the custom SQL Server image by running the following command:
 
