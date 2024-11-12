@@ -15,7 +15,7 @@ services:
       - docker_certs:/certs
 
   forgejo:
-    image: codeberg.org/forgejo/forgejo:1.21
+    image: codeberg.org/forgejo/forgejo:8
     command: >-
       bash -c '
       /bin/s6-svscan /etc/s6 &
@@ -26,6 +26,10 @@ services:
       '      
     environment:
       FORGEJO__security__INSTALL_LOCK: "true"
+      FORGEJO__service__DISABLE_REGISTRATION: "true"
+      FORGEJO__server__ROOT_URL: "http://localhost:8080"
+      FORGEJO__server__SSH_PORT: "8022"
+      FORGEJO__ssh_0x2E_minimum_key_sizes__RSA: "2048"
       FORGEJO__log__LEVEL: "debug"
       FORGEJO__repository__ENABLE_PUSH_CREATE_USER: "true"
       FORGEJO__repository__DEFAULT_PUSH_CREATE_PRIVATE: "false"
@@ -34,9 +38,10 @@ services:
       - server_data:/data
     ports:
       - 8080:3000
+      - 8022:22
 
   runner-register:
-    image: code.forgejo.org/forgejo/runner:3.4.1
+    image: code.forgejo.org/forgejo/runner:3.5.1
     links:
       - docker-in-docker
       - forgejo
@@ -61,7 +66,7 @@ services:
       '      
 
   runner-daemon:
-    image: code.forgejo.org/forgejo/runner:3.4.1
+    image: code.forgejo.org/forgejo/runner:3.5.1
     links:
       - docker-in-docker
       - forgejo
