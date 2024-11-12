@@ -1,0 +1,10 @@
+services:
+
+  aspire:
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:8
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    ports:
+      - "18888" # dashboard ui
+      - "18889" # otlp grpc
+      - "18890" # otlp http
