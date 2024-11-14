@@ -1,0 +1,31 @@
+services:
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    container_name: ollama
+    pull_policy: always
+    tty: true
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    volumes:
+      - open_webui_data:/app/backend/data
+    depends_on:
+      - ollama
+    ports:
+      - "8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - WEBUI_SECRET_KEY=t0p-s3cr3t # ref: https://docs.openwebui.com/getting-started/advanced-topics/env-configuration#webui_secret_key
+      - WEBUI_AUTH=false
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+volumes:
+  ollama_data:
+  open_webui_data:
